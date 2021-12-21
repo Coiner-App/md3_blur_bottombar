@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  blur_bottom_bar:
+  md3_blur_bottombar:
     path: ../
 
 

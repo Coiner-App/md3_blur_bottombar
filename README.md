@@ -1,14 +1,8 @@
-# blur_bottom_bar
+# md3_blur_bottombar
 
-Flutter blur bottom bar
+!!! This is a fork of https://github.com/DonsWayo/blur_bottom_bar !!!
 
-
-This is a recreation of the ios tab view with material design for android and ios
-
-
-![BlurBottomBar Gif](screenshot-ios.gif "BlurBottomBar")
-![BlurBottomBar Gif](screenshot-android.gif "BlurBottomBar")
-
+NavigationBar widget with blur behind
 
 ## Getting Started
 
@@ -17,38 +11,55 @@ Add the dependency in `pubspec.yaml`:
 ```yaml
 dependencies:
   ...
-  blur_bottom_bar: ^1.0.1
+  md3_blur_bottombar: ^1.0.1
 ```
 
 ## Basic Usage
 
 
 ```dart
-return Scaffold(
+  int _selectedIndex = 0;
+  static final List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    Search(),
+    Account(),
+  ];
+
+  static const List<NavigationDestination> _navItems = <NavigationDestination>[
+    NavigationDestination(
+      icon: Icon(Icons.home_outlined),
+      label: 'Home',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.search_outlined),
+      label: 'Search',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.account_circle_outlined),
+      label: 'Account',
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(title: Text("Blur bar example")),
       body: Stack(
         children: <Widget>[
-          _widgetOptions.elementAt(_selectedIndex),
-          BlurBottomView(
-              bottomNavigationBarItems: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home'),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Business',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.school),
-                  label: 'School',
-                )
-              ],
-              currentIndex: _selectedIndex,
-              onIndexChange: (val) {
-                _onItemTapped(val);
-              }),
+          _widgetOptions[_selectedIndex],
+          MD3BlurBottomView(
+            onIndexChange: (index) => _onItemTapped(index),
+            selectedIndex: _selectedIndex,
+            bottomNavigationBarItems: _navItems,
+          ),
         ],
       ),
     );
+  }
 ```

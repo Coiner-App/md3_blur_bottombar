@@ -1,4 +1,4 @@
-import 'package:blur_bottom_bar/blur_bottom_bar.dart';
+import 'package:md3_blur_bottombar/md3_blur_bottombar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,12 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter example',
+      title: 'MD3 bottom bar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter example Home Page'),
+      home: MyHomePage(title: 'MD3 Bottom Bar example'),
     );
   }
 }
@@ -31,41 +31,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _widgetOptions = <Widget>[
-    ListView(
-      padding: const EdgeInsets.all(8),
-      children: <Widget>[
-        Container(
-          height: 200,
-          color: Colors.amber[600],
-          child: const Center(child: Text('Entry A')),
-        ),
-        Container(
-          height: 200,
-          color: Colors.amber[500],
-          child: const Center(child: Text('Entry B')),
-        ),
-        Container(
-          height: 200,
-          color: Colors.amber[800],
-          child: const Center(child: Text('Entry C')),
-        ),
-        Container(
-          height: 300,
-          color: Colors.red[800],
-          child: const Center(child: Text('Entry C')),
-        ),
-      ],
+  static final List<Widget> _widgetOptions = <Widget>[
+    Text("Home"),
+    Text("Search"),
+    Text("Profile"),
+  ];
+
+  static const List<NavigationDestination> _navItems = <NavigationDestination>[
+    NavigationDestination(
+      icon: Icon(Icons.home_outlined),
+      label: 'Home',
     ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
+    NavigationDestination(
+      icon: Icon(Icons.search_outlined),
+      label: 'Search',
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
+    NavigationDestination(
+      icon: Icon(Icons.account_circle_outlined),
+      label: 'Account',
     ),
   ];
 
@@ -82,25 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Stack(
         children: <Widget>[
           _widgetOptions.elementAt(_selectedIndex),
-          BlurBottomView(
-              bottomNavigationBarItems: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Business',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.school),
-                  label: 'School',
-                )
-              ],
-              currentIndex: _selectedIndex,
-              onIndexChange: (val) {
-                _onItemTapped(val);
-              }),
+          MD3BlurBottomView(
+            height: 70.0,
+            onIndexChange: (index) => _onItemTapped(index),
+            selectedIndex: _selectedIndex,
+            bottomNavigationBarItems: _navItems,
+            backgroundColor: Color(0xFF192020),
+          ),
         ],
       ),
     );

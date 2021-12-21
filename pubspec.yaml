@@ -1,7 +1,7 @@
-name: blur_bottom_bar
-description: Flutter blur bottom bar is a recreation of the ios tab view with material desifn for android and ios
-version: 1.0.3
-homepage: https://github.com/DonsWayo/blur_bottom_bar
+name: md3_blur_bottombar
+description: Fork of blur_bottom_bar with the NavigationBar widget
+version: 1.0.0
+homepage: https://github.com/coineross/md3_blur_bottom_bar
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
